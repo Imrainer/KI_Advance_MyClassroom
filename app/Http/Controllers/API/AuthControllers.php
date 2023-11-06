@@ -50,22 +50,31 @@ class AuthControllers extends ApiController
   
     //<!---REGISTER----!>
     public function register(RequestRegister $requestRegister) 
-    {
-        $data = $requestRegister->only(
-            'name',
-            'email',
-            'phone', 
-            'password',
-            'password_confirmation'
-        );
-        
-        $data['id'] = Str::uuid()->toString(); 
+    {   
+        $phone = $requestRegister->input('phone');
 
-        $data['password'] = Hash::make($data['password']);
+    // Periksa apakah nomor telepon sudah terpakai
+    $existingUser = User::where('phone', $phone)->first();
 
-        User::create($data);
+    if ($existingUser) {
+        return Api::createApi(400, 'Nomor telepon sudah terpakai', null);
+    }
 
-        return Api::createApi(200, 'successfully created',$data );
+    $data = $requestRegister->only(
+        'name',
+        'email',
+        'phone', 
+        'password',
+        'password_confirmation'
+    );
+
+    $data['id'] = Str::uuid()->toString(); 
+
+    $data['password'] = Hash::make($data['password']);
+
+    User::create($data);
+
+    return Api::createApi(200, 'successfully created',$data );
         
     }
 
