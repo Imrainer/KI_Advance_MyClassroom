@@ -87,6 +87,7 @@ Route::prefix('lampiran')->group(function () {
 
 //<!--NOTIF---!>
 Route::prefix('notif')->group(function () {
+    Route::post('/getnotifmass',[NotifControllers::class, 'getNotifyMass']);
     Route::post('/getnotif',[NotifControllers::class, 'getNotify']);
     Route::post('/add',[NotifControllers::class, 'NewTask']);
     Route::post('/edit/{uuid}',[NotifControllers::class, 'Reminder']);
