@@ -107,11 +107,11 @@
         <div class="content">
             <h5 class="pt-3">Lampiran:</h5>
     
-            @if ($submission->assignment->lampiran->isNotEmpty())
+            @if ($submission->file_path)
             <div class="d-flex flex-wrap">
-            @foreach ($submission->assignment->lampiran as $lampiran)
-                <img src="{{ asset('storage/' . $lampiran->file) }}" class="p-1" width="400px" alt="Lampiran Tugas">
-            @endforeach
+           
+                <img src="{{ asset('storage/' . $submission->file_path) }}" class="p-1" width="400px" alt="Lampiran Tugas">
+
             </div>
             @else
             <div class="container">

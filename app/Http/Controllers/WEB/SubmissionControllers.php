@@ -37,11 +37,9 @@ class SubmissionControllers extends Controller
          $admin = session('id');
          $admin = Admin::where('id', $admin)->first();
          $submission = Submission::with('user', 'assignment')->where('id', $uuid)->firstOrFail();
-         
-         // Find the Score record based on a specific criterion, e.g., submission_id.
+        
          $score = Score::where('submission_id', $uuid)->first();
-     
-         // Check if a Score record was found before accessing its properties.
+    
          $scoreId = $score ? $score->id : null;
      
          return view('pages/SubmissionById', compact(['submission', 'admin', 'score', 'scoreId']));

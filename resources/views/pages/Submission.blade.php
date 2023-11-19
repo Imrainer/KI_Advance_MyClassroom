@@ -1,4 +1,4 @@
-<x-layout title="Submission | Jelajah Nusantara">
+<x-layout title="Submission | My Classroom">
  
     <div class="d-flex">
     <x-Sidebar photo="{{$admin->photo}}" name="{{$admin->name}}"></x-Sidebar>
@@ -51,7 +51,7 @@
                     @endphp
                     @if ($submissionScores->isNotEmpty())
                         @foreach ($submissionScores as $submissionScore)
-                            {{ $submissionScore->score }}
+                            {{ $submissionScore->score }}/100
                         @endforeach
                     @else
                         Belum Dinilai

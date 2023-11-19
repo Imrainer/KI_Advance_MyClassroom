@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\API\NotifControllers;
 use App\Models\Lampiran;
 use App\Models\Admin;
 use App\Models\Assignment;
@@ -45,7 +46,7 @@ class AssignmentControllers extends Controller
      }
  
      // <!---MEMBUAT ASSIGNMENT---!>
-     public function create(Request $request)
+     public function create(Request $request, NotifControllers $notifControllers)
      {
         $adminId = session('id'); // $adminId adalah array admin yang login
          $idAdmin = $adminId['id'];
@@ -60,9 +61,10 @@ class AssignmentControllers extends Controller
         
         $assignment['id'] = Str::uuid()->toString();
         
-        Assignment::create($assignment);
-         return redirect('/assignment')->with('Assignment baru berhasil ditambahkan');
+         $response = (new NotifControllers)->NewTask($request, $assignment);   
+	    return redirect('/assignment')->with('Assignment baru berhasil ditambahkan');
      }
+
      
      // <!---MENGEDIT ASSIGNMENT--!>
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
+use App\Helpers\Api;
 use App\Http\Controllers\ApiController;
 use App\Helpers\Notification;
 use App\Models\Mata_Pelajaran;
@@ -15,10 +16,8 @@ use Illuminate\Support\Str;
 class NotifControllers extends ApiController
 {   
 
-            function getNotifyMass(Request $request)
+            function getNotifyMass(Request $request, array $data)
         {   
-            $adminId = $request->input('teacher');
-
             $users = User::all();
             $deviceTokens = $users->pluck('device_token')->filter();
 
@@ -117,32 +116,34 @@ class NotifControllers extends ApiController
             return Api::createApi(200, 'successfully sent', $data);
         }
         
-         public function NewTask (request $request) {
-          
-            $notificationData = [
-                'to' => $request->input('to'), // Device Token
-             
-                'title' => 'New Assignment!',
-                'body' => 'You have a new assignment: ' . $request->input('title'),
+   
+        public function NewTask(Request $request, array $data) {
+        $notificationData = [
+        'title' => $data['title'],  
+            'body' => 'You have a new Assingment',  
             ];
 
-            $response = $this->getNotifyMass($notificationData);
+        $response = $this->getNotifyMass($request, $notificationData);
 
-            return  Api::createApi(200, 'successfully created score', $notificationData);
+        return Api::createApi(200, 'successfully sent notif', $notificationData);
+        }
 
-         }
+    
 
          public function Reminder (request $request) {
-            $notificationData = [
-                'to' => $request->input('to'), // Device Token
-                'title' => 'Reminder!',
-                'body' => 'Do not be late to submit : ' . $request->input('task_description'),
-            ];
-           
-            $response = $this->getNotify($notificationData);
+        // Step 1: Fetch users without submission
+        $usersWithoutSubmission = User::whereDoesntHave('submissions')->get();
 
-            return  Api::createApi(200, 'successfully created score', $notificationData);
+        // Step 2: Construct notification payload
+        $notificationData = [
+            'title' => 'Reminder!',
+            'body' => 'Do not be late to submit your assignment.',
+        ];
 
-         }
+        // Step 3: Send notifications
+        $this->RemindNotif($usersWithoutSubmission, $notificationData);
+
+        return Api::createApi(200, 'Reminders sent successfully');
+     }
 
 }

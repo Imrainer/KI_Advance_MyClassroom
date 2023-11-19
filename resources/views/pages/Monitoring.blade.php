@@ -1,7 +1,9 @@
 <x-layout title="Monitoring | My Classroom">
 <style>
-.dark_blue{
-    background-color:  rgb(16, 23, 41);
+.yellow{
+    background-color:  yellow;
+    color: blueviolet;
+    font-weight: bold;
 }
 
 </style>
@@ -15,14 +17,14 @@
 
 
         <div class="card border-primary mb-3 mt-3 col-md-8" style="max-width: 32rem;">
-        <div class="card-header  dark_blue text-light bg-gradient">Diagram</div>
+        <div class="card-header  yellow  bg-gradient">Diagram</div>
         <div class="card-body">
             <canvas id="myChart"></canvas>
         </div>
         </div> 
         
         <div class="card border-primary mb-3 ms-5 mt-3 col-md-4 " style="max-height: 12rem;">
-        <div class="card-header  dark_blue text-light bg-gradient">User</div>
+        <div class="card-header  yellow  bg-gradient">User</div>
         <div class="card-body">
             <h1 class="card-title text-center">{{$userCount}}</h1>
         </div>
@@ -33,14 +35,14 @@
 
 <div class="d-flex ms-5 mt-3">
 <div class="card border-primary mb-3 shadow col-md-5" style="max-width: 18rem;">
-    <div class="card-header text-center dark_blue bg-gradient text-light ">Mata Pelajaran</div>
+    <div class="card-header text-center yellow bg-gradient  ">Mata Pelajaran</div>
     <div class="card-body">
         <h1 class="card-title text-center">{{$mapelCount}}</h1>
     </div>
     </div>
 
     <div class="card border-primary mb-3 shadow col-md-5 ms-5" style="max-width: 18rem;">
-        <div class="card-header text-center dark_blue bg-gradient text-light ">Assignment</div>
+        <div class="card-header text-center yellow bg-gradient  ">Assignment</div>
         <div class="card-body">
             <h1 class="card-title text-center">{{$assignmentCount}}</h1>
         </div>

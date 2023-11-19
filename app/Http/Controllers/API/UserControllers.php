@@ -38,14 +38,6 @@ class UserControllers extends ApiController
         $authenticatedUserId = Auth::id();
         $users = User::whereNotIn('user_id',[ $authenticatedUserId])->get();
         foreach ($users as $user) {
-            // $total_likes = Like::where('liked_by',$authenticatedUserId)->count();
-            // $like = Like::where('user_id',$user->user_id)->where('liked_by',$authenticatedUserId)->first();
-            // // dd($like);
-            // if(!$like) {
-            //     $like_by_you = false;
-            // } else {
-            //     $like_by_you = true;
-            // }
             
             if ($user->foto) {
                 $user->foto = 'https://magang.crocodic.net/ki/Rainer/KI_Advance_Classroom/public/storage/' . $user->foto;
@@ -64,23 +56,10 @@ class UserControllers extends ApiController
         $authenticatedUserId = Auth::id();
         $user = User::find($user_id);
 
-        // $total_likes = Like::where('liked_by',$authenticatedUserId)->count();
-        // $like = Like::where('user_id',$user->user_id)->where('liked_by',$authenticatedUserId)->first();
-
-        // if(!$like) {
-        //     $like_by_you = false;
-        // } else {
-        //     $like_by_you = true;
-        // }
-
         if ($user && $user->foto) {
             $user->foto = 'https://magang.crocodic.net/ki/Rainer/KI_Advance_Classroom/public/storage/' . $user->foto;
         }
-
-        // $user->total_likes = Like::where('liked_by',$user)->count();
-        // $user->like_by_you = $like_by_you;
-
-
+        
         if ($user) {
             return Api::createApi(200, 'success', $user);
         } else {

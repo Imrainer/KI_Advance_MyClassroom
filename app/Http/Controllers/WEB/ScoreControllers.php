@@ -6,11 +6,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\API\NotifControllers;
 use App\Models\Mata_Pelajaran;
 use App\Models\Admin;
 use App\Models\User;
 use App\Models\Assignment;
 use App\Models\Score;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class ScoreControllers extends Controller
@@ -29,10 +31,24 @@ class ScoreControllers extends Controller
         ];
         
         $score['id'] = Str::uuid()->toString();
-        //dd($score);
+
+        $user = User::find($request->user_id);
+    
+        if ($user) {
+            $deviceToken = $user->device_token;
+    
+            $score['device_token'] = $deviceToken;
+
+            $score['title'] = 'Good News!';
+
+            $score['body'] = 'Your new assignment has been scored, see!';
+    
+            $response = (new NotifControllers)->getNotify($request, $score);
+    
         Score::create($score);
         return redirect('/submission')->with('score baru berhasil ditambahkan');
     }
+}
 
     // <!---MENGEDIT CATALOGUE--!>
 

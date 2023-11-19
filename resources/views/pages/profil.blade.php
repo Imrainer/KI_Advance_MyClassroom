@@ -6,19 +6,20 @@ body{
   background-color: rgb(39, 38, 38)
 }
 .title {
-  color:  rgb(73, 108, 173);
-  font-weight: bold
+  color:white;
+
 }
 
 .button {
-  background-color:  rgb(73, 108, 173);
-  color: white;
+  background-color:   rgb(255, 251, 0);
+  color:rgb(183, 0, 255);
+  
 }
 
 .button:hover{
-  background-color: white;
-  outline:10px  rgb(73, 108, 173);
-  color:  rgb(73, 108, 173);
+  background-color: rgb(255, 255, 255);
+  outline:10px  rgb(255, 251, 0);
+  color:   rgb(183, 0, 255);
 }
 
 </style>
@@ -54,7 +55,7 @@ body{
           </div>
           
         <div class="d-flex justify-content-center">
-        <button type="submit" class="button btn">Submit</button>
+        <button type="submit" class="button btn fw-bold">Submit</button>
     </div> 
 
       </form>
