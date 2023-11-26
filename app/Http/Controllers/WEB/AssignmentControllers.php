@@ -58,11 +58,12 @@ class AssignmentControllers extends Controller
             'due_date'=>$request->due_date,
             'admin_id'=>$idAdmin,
         ];
-        
+          
         $assignment['id'] = Str::uuid()->toString();
+        Assignment::create($assignment);
+         $response = (new NotifControllers)->NewTask($request, $assignment);
         
-         $response = (new NotifControllers)->NewTask($request, $assignment);   
-	    return redirect('/assignment')->with('Assignment baru berhasil ditambahkan');
+	     return redirect('/assignment')->with('Assignment baru berhasil ditambahkan');
      }
 
      

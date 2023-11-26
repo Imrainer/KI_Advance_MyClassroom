@@ -18,7 +18,7 @@ class CreateAssignmentTable extends Migration
             $table->string('title');
             $table->string('description')->unique()->nullable();
             $table->timestamp('due_date');
-            $table->id('admin_id',120)->nullable();
+            $table->foreign('admin_id',120)->nullable();
             $table->foreign('admin_id')->references('id')->on('admin')->onDelete('cascade');
             $table->uuid('mata_pelajaran_id',120)->nullable();
             $table->foreign('mata_pelajaran_id')->references('id')->on('mata_pelajaran')->onDelete('cascade');
