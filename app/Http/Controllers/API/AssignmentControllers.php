@@ -75,10 +75,10 @@ class AssignmentControllers extends ApiController
         $assignment->lampiran_urls = null;
     }
 
-    // Get the user's score for the assignment, if it exists
-    $score = Score::where('submission_id', $submission->id)
-        ->where('user_id', $user_id)
-        ->first();
+     // Get the user's score for the assignment, if it exists
+     $score = Score::where('submission_id', $submission)
+     ->where('id', $uuid)
+     ->first();
 
     if ($score) {
         $assignment->score = $score->score;
